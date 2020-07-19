@@ -17,10 +17,10 @@ switch( true ) {
 
 module.exports = {
   async onEnd({
-    utils: {
-      build: { failPlugin, failBuild },
-    },
-  }) {
+                utils: {
+                  build: { failPlugin, failBuild },
+                },
+              }) {
 
     // Since calling utils.build.failBuild will not actually fail the build in onPreBuild, moved the conditions in onPreBuild.
     if( authMethod === 'na' ) {
@@ -67,7 +67,7 @@ module.exports = {
 
       if (status != 200) {
         return failPlugin(
-          "Cloudflare cache couldn't be purged. Status: " + status + " " + statusText
+            "Cloudflare cache couldn't be purged. Status: " + status + " " + statusText
         );
       }
       console.log('Cloudflare cache purged successfully!');
