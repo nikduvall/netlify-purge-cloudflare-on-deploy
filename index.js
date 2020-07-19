@@ -6,40 +6,37 @@ const {
 
 let authMethod = 'na';
 switch( true ) {
-  case CLOUDFLARE_API_TOKEN && CLOUDFLARE_ZONE_ID:
+  case typeof CLOUDFLARE_API_TOKEN !== 'undefined' && typeof CLOUDFLARE_ZONE_ID !== 'undefined':
     authMethod = 'TOKEN';
     break;
 
-  case CLOUDFLARE_API_KEY && CLOUDFLARE_ZONE_ID && CLOUDFLARE_EMAIL:
+  case typeof CLOUDFLARE_API_KEY !== 'undefined' && typeof CLOUDFLARE_ZONE_ID !== 'undefined' && typeof CLOUDFLARE_EMAIL !== 'undefined':
     authMethod = 'KEY';
     break;
 }
 
 module.exports = {
-  onPreBuild: ({ utils }) => {
-    if( authMethod === 'na' ) {
-      return utils.build.failBuild(
-          'Could not determine auth method.  Please review the readme file and verify your environment variables'
-      );
-    } else {
-      switch ( authMethod ) {
-        case 'TOKEN':
-          console.log('Using Cloudlflare API ' + authMethod +' method of authentication');
-          break;
-
-        case 'KEY':
-          console.warn('Using Cloudlflare API ' + authMethod +' method of authentication.  Please review readme for instructions on updating to using recommended method of TOKEN authentication');
-          break;
-      }
-
-    }
-  },
   async onEnd({
-    inputs,
     utils: {
       build: { failPlugin, failBuild },
     },
   }) {
+
+    // Since calling utils.build.failBuild will not actually fail the build in onPreBuild, moved the conditions in onPreBuild.
+    if( authMethod === 'na' ) {
+      return failBuild(
+          'Could not determine auth method.  Please review the plugin README file and verify your environment variables'
+      );
+    }
+    else if( authMethod !== 'TOKEN' && authMethod !== 'KEY' ) {
+      return failBuild(
+          "'" + authMethod + "' is not a valid Authentication Method.  Please report this issue to the developer."
+      );
+    }
+    else {
+      console.log('Cloudflare ' + authMethod + ' Authentication method detected.');
+    }
+
     console.log('Preparing to trigger Cloudflare cache purge');
     let baseUrl = `https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/purge_cache`;
     let headers;
