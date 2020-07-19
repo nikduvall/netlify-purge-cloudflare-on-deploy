@@ -11,7 +11,7 @@ From Cloudflare, you'll need:
 * Your Zone ID. Go to your Cloudflare dashboard, enter your website, and look in the bottom right hand corner under 'API'.
 * An API Token
 
-### API TOKEN - Instructions for creating new Cloudflare API Token
+#### API TOKEN - Instructions for creating new Cloudflare API Token
 1.  In Cloudflare, navigate to My Profile --> API Tokens
 2.  Click Create Token Button
 3.  Click Custom Token Section --> Create Custom Token --> Get Started Button
@@ -22,7 +22,7 @@ From Cloudflare, you'll need:
 5.  Click Create Token Button
 6.  Record the API Token to your password safe of choice.  This is the last time you will have an opportunity to see this token.
 
-### API TOKEN - Instructions for configuring Netlify
+#### API TOKEN - Instructions for configuring Netlify
 In Netlify, go to Settings -> Build & Deploy -> Environment -> Environment variables and set up:
 * CLOUDFLARE_ZONE_ID
 * CLOUDFLARE_API_TOKEN
@@ -33,7 +33,7 @@ It is recommended you use API Token authentication instead.  Please see above fo
 * Your Zone ID. Go to your Cloudflare dashboard, enter your website, and look in the bottom right hand corner under 'API'.
 * Your Cloudflare API key.
 
-### API KEY - Instructions for finding your Cloudflare API Key
+#### API KEY - Instructions for finding your Cloudflare API Key
 1.  In Cloudflare, navigate to My Profile --> API Tokens
 2.  Below the API Tokens section, you will see the API Keys section
 3.  Click the View button to the right of Global API Key
@@ -41,7 +41,7 @@ It is recommended you use API Token authentication instead.  Please see above fo
 5.  Your API Key is revealed.  No need to record this as you can access it anytime again in the future.
 
 
-### API TOKEN - Instructions for configuring Netlify
+#### API KEY - Instructions for configuring Netlify
 In Netlify, go to Settings -> Build & Deploy -> Environment -> Environment variables and set up:
 * CLOUDFLARE_ZONE_ID
 * CLOUDFLARE_API_KEY
